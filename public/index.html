@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CAMBIA el nombre de la tienda aca y en el <h1> -->
+  <title>Juguetería Machan</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <header class="barra">
+    <h1 class="marca">Juguetería Machan</h1>
+    <div class="sesion">
+      <input id="buscador" type="search" placeholder="Buscar productos" oninput="buscar(this.value)">
+      <span id="saludo"></span>
+      <button id="btn-ingresar" class="btn btn-claro" onclick="abrirModal()">Ingresar</button>
+      <button id="btn-salir" class="btn btn-claro oculto" onclick="cerrarSesion()">Salir</button>
+      <button id="btn-admin" class="btn btn-claro oculto" onclick="abrirPanelAdmin()">Panel admin</button>
+      <button class="btn btn-carrito" onclick="alternarCarrito()">
+        Carrito <span id="contador" class="contador">0</span>
+      </button>
+    </div>
+  </header>
+
+  <div id="mensaje" class="mensaje oculto"></div>
+
+  <main class="contenido">
+    <nav id="categorias" class="categorias"></nav>
+    <section id="panel-admin" class="panel-admin oculto">
+      <div class="panel-admin-cabecera">
+        <h2>Administración de stock</h2>
+        <button class="btn-cerrar" onclick="cerrarPanelAdmin()">×</button>
+      </div>
+      <div id="admin-stock-lista" class="admin-stock-lista"></div>
+    </section>
+    <section id="productos" class="grilla">
+      <p class="vacio">Cargando productos...</p>
+    </section>
+  </main>
+
+  <!-- CARRITO: panel lateral -->
+  <aside id="carrito" class="carrito oculto">
+    <div class="carrito-cabecera">
+      <h2>Tu carrito</h2>
+      <button class="btn-cerrar" onclick="alternarCarrito()">×</button>
+    </div>
+    <ul id="carrito-lista" class="carrito-lista"></ul>
+    <div class="carrito-pie">
+      <p>Total estimado: <strong id="carrito-total">$0</strong></p>
+      <button class="btn btn-principal" onclick="comprar()">Comprar</button>
+    </div>
+  </aside>
+
+  <!-- LOGIN / REGISTRO: ventana modal -->
+  <div id="modal" class="modal oculto">
+    <div class="modal-caja">
+      <button class="btn-cerrar" onclick="cerrarModal()">×</button>
+
+      <form id="form-login" onsubmit="iniciarSesion(event)">
+        <h2>Ingresar</h2>
+        <input id="login-email" type="email" placeholder="Email" required>
+        <input id="login-password" type="password" placeholder="Contraseña" required>
+        <button class="btn btn-principal" type="submit">Ingresar</button>
+        <p class="cambiar">¿No tenés cuenta? <a href="#" onclick="mostrarRegistro(true)">Registrate</a></p>
+      </form>
+
+      <form id="form-registro" class="oculto" onsubmit="registrar(event)">
+        <h2>Crear cuenta</h2>
+        <input id="reg-nombre" type="text" placeholder="Nombre" required>
+        <input id="reg-email" type="email" placeholder="Email" required>
+        <input id="reg-password" type="password" placeholder="Contraseña (mínimo 6)" minlength="6" required>
+        <button class="btn btn-principal" type="submit">Registrarme</button>
+        <p class="cambiar">¿Ya tenés cuenta? <a href="#" onclick="mostrarRegistro(false)">Ingresá</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
